@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns = "http:www.w3.org/1999/xhtml">
+<html xmlns = "http:www.w3.org/1999/xhtml" 
+xmlns:th="https://www.thymeleaf.org/">
 <head>
 <meta charset="UTF-8"/>
 <title>Cadastro do título</title>
@@ -19,6 +20,12 @@
 	</nav>
 
 	<form class="form-horizontal" method="POST" action="/showderock">
+		<div class="alert alert-success" th:if="${!#strings.isEmpty(mensagem)}">
+		   <span>Ingresso salvo com sucesso!</span>
+		</div>
+	
+	
+	
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title">Casa de Show de Rock 80'90'</h3>
@@ -52,8 +59,7 @@
 					<label for="status" class="col-sm-2 control-label">Status</label>
 					<div class="col-sm-2">
 						<select class ="form-control" name ="status">
-							<option value="ESGOTADO">Esgotado</option>
-							<option value="DISPONIVEL">Disponivel</option>
+							<option th:each="status : ${todosStatusIngresso}" th:value = "${status}" th:text="${status.descricao}"></option>
 						</select>
 					</div>
 				</div>
