@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http:www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="LayoutPadrao">
+
+<head>
+<meta charset="UTF-8"/>
+<title>Pesquisa de ingressos</title>
+</head>
+<section layout:fragment="conteudo">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="clearfix">
+				<h3 class="panel-title aw-titulo-panel">Pesquisa de Ingressos</h3>
+				<a class="btn btn-link aw-link-panel" href="/showderock/novo">Novos
+					ingressos</a>
+			</div>
+		</div>
+
+		<div class="panel-body">
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th class="text-center col-md-1">Pessoa</th>
+						<th class="text-center col-md-2">Banda</th>					
+						<th class="text-center col-md-2">Data do Show</th>
+						<th class="text-center col-md-2">Valor do Ingresso</th>
+						<th class="text-center col-md-1">Status</th>
+						<th class="col-md-1"></th>
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="titulo : ${showderock}">
+						<th class="text-center" th:text="${titulo.codigo}">1</th>
+						<th th:text="${titulo.descricao}"></th>
+						<th class="text-center" th:text="${{titulo.dataDoShow}}"></th>
+						<th class="text-center" th:text="|R$ ${{titulo.ingresso}}|"></th>
+						<th class="text-center">
+							<span class="label" th:text="${titulo.status.descricao}"
+							th:classappend="${titulo.esgotado ? 'label-danger' : 'label-success'}">Success</span>
+							
+							
+						</th>
+					</tr>		
+					<tr>
+						<td colspan="6" th:if="${#lists.isEmpty(showderock)	}">Nenhum título foi encontrado</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</section>
+
+</html>

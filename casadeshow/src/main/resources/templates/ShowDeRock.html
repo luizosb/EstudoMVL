@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http:www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="LayoutPadrao">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Rock 80'90'</title>
+</head>
+
+<section layout:fragment="conteudo">
+	<form class="form-horizontal" method="POST" action="/showderock">
+		<div class="alert alert-success"
+			th:if="${!#strings.isEmpty(mensagem)}">
+			<span th:text="${mensagem}">Ingresso salvo com sucesso!</span>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="clearfix">
+				<h3 class="panel-title aw-titulo-panel">Casa de Show Rock 80'90'</h3>
+				<a class="btn btn-link aw-link-panel" href="/showderock">Voltar para Ingressos</a>
+			</div>
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label for="descricao" class="col-sm-2 control-label">Banda</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" id="descricao"
+							name="descricao" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="dataDoShow" class="col-sm-2 control-label">Data
+						do Show</label>
+					<div class="col-sm-2">
+						<input type="text" class="form-control" id="dataDoShow"
+							name="dataDoShow" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="ingresso" class="col-sm-2 control-label">Ingresso</label>
+					<div class="col-sm-2">
+						<input type="text" class="form-control" id="ingresso"
+							name="ingresso" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="status" class="col-sm-2 control-label">Status</label>
+					<div class="col-sm-2">
+						<select class="form-control" name="status">
+							<option th:each="status : ${todosStatusIngresso}"
+								th:value="${status}" th:text="${status.descricao}"></option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-3 col-sn-10">
+						<button type="submit" class="btn btn-primary">Salvar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</section>
+</html>
