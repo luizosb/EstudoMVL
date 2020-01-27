@@ -4,44 +4,50 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="LayoutPadrao">
 <head>
-	<meta charset="UTF-8"/>
-	<title>Rock 80'90'</title>
+<meta charset="UTF-8" />
+<title>Rock 80'90'</title>
 </head>
 
 <section layout:fragment="conteudo">
-	<form class="form-horizontal" method="POST" action="/showderock">
-		<div class="alert alert-success"
-			th:if="${!#strings.isEmpty(mensagem)}">
-			<span th:text="${mensagem}">Ingresso salvo com sucesso!</span>
-		</div>
+	<form class="form-horizontal" method="POST" action="/showderock"
+		th:object="${titulo}">
+		<div layout:insert="MensagemGeral"></div>
+		<div layout:insert="MensagemErro"></div>
+
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="clearfix">
-				<h3 class="panel-title aw-titulo-panel">Casa de Show Rock 80'90'</h3>
-				<a class="btn btn-link aw-link-panel" href="/showderock">Voltar para Ingressos</a>
-			</div>
-			</div>
+					<h3 class="panel-title aw-titulo-panel">Casa de Show Rock
+						80'90'</h3>
+					<a class="btn btn-link aw-link-panel" href="/showderock">Voltar
+						para Ingressos</a>
+				</div>
+			</div>	
 			<div class="panel-body">
-				<div class="form-group">
+				<input type="hidden" th:field="*{codigo}"/>
+				<div class="form-group"
+					th:classappend="${#fields.hasErrors('descricao')} ? has-error">
 					<label for="descricao" class="col-sm-2 control-label">Banda</label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control" id="descricao"
-							name="descricao" />
+							th:field="*{descricao}" />
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group"
+					th:classappend="${#fields.hasErrors('dataDoShow')} ? has-error">
 					<label for="dataDoShow" class="col-sm-2 control-label">Data
 						do Show</label>
 					<div class="col-sm-2">
 						<input type="text" class="form-control" id="dataDoShow"
-							name="dataDoShow" />
+							th:field="*{dataDoShow}" />
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group"
+					th:classappend="${#fields.hasErrors('ingresso')} ? has-error">
 					<label for="ingresso" class="col-sm-2 control-label">Ingresso</label>
 					<div class="col-sm-2">
 						<input type="text" class="form-control" id="ingresso"
-							name="ingresso" />
+							th:field="*{ingresso}" />
 					</div>
 				</div>
 				<div class="form-group">

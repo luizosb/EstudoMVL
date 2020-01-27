@@ -5,7 +5,7 @@
 	layout:decorator="LayoutPadrao">
 
 <head>
-<meta charset="UTF-8"/>
+<meta charset="UTF-8" />
 <title>Pesquisa de ingressos</title>
 </head>
 <section layout:fragment="conteudo">
@@ -23,34 +23,65 @@
 				<thead>
 					<tr>
 						<th class="text-center col-md-1">Pessoa</th>
-						<th class="text-center col-md-2">Banda</th>					
+						<th class="text-center col-md-2">Banda</th>
 						<th class="text-center col-md-2">Data do Show</th>
 						<th class="text-center col-md-2">Valor do Ingresso</th>
 						<th class="text-center col-md-1">Status</th>
 						<th class="col-md-1"></th>
-
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="titulo : ${showderock}">
-						<th class="text-center" th:text="${titulo.codigo}">1</th>
-						<th th:text="${titulo.descricao}"></th>
-						<th class="text-center" th:text="${{titulo.dataDoShow}}"></th>
-						<th class="text-center" th:text="|R$ ${{titulo.ingresso}}|"></th>
-						<th class="text-center">
-							<span class="label" th:text="${titulo.status.descricao}"
-							th:classappend="${titulo.esgotado ? 'label-danger' : 'label-success'}">Success</span>
-							
-							
-						</th>
-					</tr>		
+						<td class="text-center" th:text="${titulo.codigo}">1</td>
+						<td th:text="${titulo.descricao}"></td>
+						<td class="text-center" th:text="${{titulo.dataDoShow}}"></td>
+						<td class="text-center" th:text="|R$ ${{titulo.ingresso}}|"></td>
+						<td class="text-center"><span class="label"
+							th:text="${titulo.status.descricao}"
+							th:classappend="${#strings.toString(titulo.status) == 'ESGOTADO' ? 'label-danger' : 'label-success'}">Success</span>
+
+						</td>
+						<td class="text-center"><a class="btn btn-link btn-xs"
+							th:href="@{/showderock/{codigo}(codigo=${titulo.codigo})}"> <span
+								class="glyphicon glyphicon-pencil"></span>
+						</a> <a class="btn btn-link btn-xs" data-toggle="modal"
+							data-target="#confirmacaoExclusaoModal"
+							th:attr="data-codigo=${titulo.codigo}, data-descricao=${titulo.descricao}">
+								<span class="glyphicon glyphicon-remove"></span>
+
+						</a></td>
+					</tr>
 					<tr>
-						<td colspan="6" th:if="${#lists.isEmpty(showderock)	}">Nenhum título foi encontrado</td>
+						<td colspan="6" th:if="${#lists.isEmpty(showderock)	}">Nenhum
+							título foi encontrado</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
+
+		<div layout:insert="DialogoConfirmacaoExclusao"></div>
+
+
 	</div>
 </section>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
